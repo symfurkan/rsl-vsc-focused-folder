@@ -1,51 +1,80 @@
 {
-  "name": "rsl-vsc-focused-folder",
-  "displayName": "Focused Folder",
-  "description": "",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.50.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:rsl-vsc-focused-folder.helloWorld"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "views": {
-      "explorer": [{
-        "id":"focusedFolder",
-        "name": "Focused Folder"
-      }]
-    },
-    "commands": [
-      {
-        "command": "rsl-vsc-focused-folder.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "lint": "eslint src --ext ts",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "test": "node ./out/test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.0",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.50.0",
-    "@typescript-eslint/eslint-plugin": "^4.1.1",
-    "@typescript-eslint/parser": "^4.1.1",
-    "eslint": "^7.9.0",
-    "glob": "^7.1.6",
-    "mocha": "^8.1.3",
-    "typescript": "^4.0.2",
-    "vscode-test": "^1.4.0"
-  }
+	"name": "rsl-vsc-focused-folder",
+	"displayName": "Focused Folder",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:rsl-vsc-focused-folder.helloWorld",
+		"onView:rsl-vsc-focused-folder.focusedFolderView"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsWelcome": [
+			{
+				"view": "rsl-vsc-focused-folder.focusedFolderView",
+				"contents": "Not selected focused folder"
+			}
+		],
+		"views": {
+			"explorer": [
+				{
+					"id": "rsl-vsc-focused-folder.focusedFolderView",
+					"name": "Focused Folder"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "rsl-vsc-focused-folder.focusedFolderView.refresh",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "rsl-vsc-focused-folder.focusedFolderView.focusFolder",
+				"title": "Focus Folder"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "rsl-vsc-focused-folder.focusedFolderView.refresh",
+					"when": "view == rsl-vsc-focused-folder.focusedFolderView",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "rsl-vsc-focused-folder.focusedFolderView.focusFolder",
+					"when": "explorerResourceIsFolder"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.50.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"eslint": "^7.9.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	}
 }

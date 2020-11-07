@@ -6,4 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-10-08
 - Initial release
+- "focus folder" komutu ile focused folder seçilebilir.
+- Focused Folder View'ı içerisinden text dosyalrı açılabilir.
