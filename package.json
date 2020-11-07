@@ -10,7 +10,6 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:rsl-vsc-focused-folder.helloWorld",
 		"onView:rsl-vsc-focused-folder.focusedFolderView"
 	],
 	"main": "./out/extension.js",
