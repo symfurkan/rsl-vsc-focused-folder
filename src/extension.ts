@@ -3,13 +3,15 @@ import { focusedFolderTreeView, FolderAndFile } from "./focusedFolderTreeView";
 
 export function activate(context: vscode.ExtensionContext) {
 	const preCommandId = "rsl-vsc-focused-folder.focusedFolderView";
-	const treeView = new focusedFolderTreeView(vscode.workspace.workspaceFolders);
+	const treeView = new focusedFolderTreeView(
+		context,
+		vscode.workspace.workspaceFolders
+	);
 
 	vscode.window.registerTreeDataProvider(
 		"rsl-vsc-focused-folder.focusedFolderView",
 		treeView
 	);
-
 	context.subscriptions.push(
 		...[
 			vscode.commands.registerCommand(`${preCommandId}.focusFolder`, (args) => {
@@ -19,21 +21,11 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.commands.registerCommand(`${preCommandId}.refresh`, (args) => {
 				treeView.refresh();
 			}),
-			vscode.commands.registerCommand(
-				`${preCommandId}.openFile`,
-				async (file: FolderAndFile) => {
-					try {
-						await vscode.window.showTextDocument(file.resourceUri);
-					} catch (error) {
-						vscode.window.showErrorMessage(
-							"Focused Folder Extensions not yet support opened this file type"
-						);
-					}
-				}
+			vscode.commands.registerCommand(`${preCommandId}.openFile`, (file) =>
+				vscode.commands.executeCommand("vscode.open", file.resourceUri)
 			),
 		]
 	);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}

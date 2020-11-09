@@ -8,11 +8,51 @@ export class focusedFolderTreeView
 	readonly onDidChangeTreeData: vscode.Event<
 		FolderAndFile | undefined | void
 	> = this._onDidChangeTreeData.event;
+	private settings: {
+		lastFocusOnLoad: boolean | undefined;
+		lastFocused: string | undefined;
+	} = {
+		lastFocusOnLoad: false,
+		lastFocused: "",
+	};
 	private selectedFolder?: vscode.Uri;
-	constructor(private workspaceRoot?: readonly vscode.WorkspaceFolder[]) {}
+	constructor(
+		private extensionContext: vscode.ExtensionContext,
+		private workspaceRoot: readonly vscode.WorkspaceFolder[] | undefined
+	) {
+		this.getSettings();
+		if (this.settings.lastFocusOnLoad && this.settings.lastFocused) {
+			this.selectFolder(vscode.Uri.parse(this.settings.lastFocused));
+		}
+	}
 
-	refresh(): void {
-		this._onDidChangeTreeData.fire();
+	private getSettings() {
+		this.settings = {
+			lastFocusOnLoad: vscode.workspace
+				.getConfiguration("focusedFolder")
+				.get("lastFocusOnLoad"),
+			lastFocused: this.workspaceRoot
+				? this.extensionContext.workspaceState.get(
+						"rsl-vsc-focused-folder.lastFocused"
+				  )
+				: this.extensionContext.globalState.get(
+						"rsl-vsc-focused-folder.lastFocused"
+				  ),
+		};
+	}
+
+	private setLastFocused(uri: string) {
+		if (this.workspaceRoot) {
+			this.extensionContext.workspaceState.update(
+				"rsl-vsc-focused-folder.lastFocused",
+				uri
+			);
+		} else {
+			this.extensionContext.globalState.update(
+				"rsl-vsc-focused-folder.lastFocused",
+				uri
+			);
+		}
 	}
 
 	private async recursiveFolder(uri: vscode.Uri) {
@@ -33,10 +73,15 @@ export class focusedFolderTreeView
 			});
 	}
 
+	refresh(): void {
+		this._onDidChangeTreeData.fire();
+	}
+
 	async selectFolder(uri: vscode.Uri) {
 		this.selectedFolder = uri;
-		console.log(await vscode.workspace.fs.stat(uri));
-		console.log(await vscode.workspace.fs.readDirectory(uri));
+		this.setLastFocused(uri.fsPath);
+		//console.log(await vscode.workspace.fs.stat(uri));
+		//console.log(await vscode.workspace.fs.readDirectory(uri));
 		this.refresh();
 	}
 

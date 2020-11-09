@@ -2,6 +2,7 @@
 	"name": "rsl-vsc-focused-folder",
 	"displayName": "Focused Folder",
 	"description": "",
+	"publisher": "rsl",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.50.0"
@@ -53,6 +54,16 @@
 					"when": "explorerResourceIsFolder"
 				}
 			]
+		},
+		"configuration":{
+			"title": "FocusedFolder",
+			"properties": {
+				"focusedFolder.lastFocusOnLoad":{
+					"type":"boolean",
+					"default":false,
+					"description":"Focused Folder focus on restart on last"
+				}
+			}
 		}
 	},
 	"scripts": {
