@@ -11,46 +11,46 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onView:rsl-vsc-focused-folder.focusedFolderView"
+		"onView:focusedFolderView"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"viewsWelcome": [
 			{
-				"view": "rsl-vsc-focused-folder.focusedFolderView",
+				"view": "focusedFolderView",
 				"contents": "Not selected focused folder"
 			}
 		],
 		"views": {
 			"explorer": [
 				{
-					"id": "rsl-vsc-focused-folder.focusedFolderView",
+					"id": "focusedFolderView",
 					"name": "Focused Folder"
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "rsl-vsc-focused-folder.focusedFolderView.refresh",
+				"command": "focusedFolderView.refresh",
 				"title": "Refresh",
 				"icon": "$(refresh)"
 			},
 			{
-				"command": "rsl-vsc-focused-folder.focusedFolderView.focusFolder",
+				"command": "focusedFolderView.focusFolder",
 				"title": "Focus Folder"
 			}
 		],
 		"menus": {
 			"view/title": [
 				{
-					"command": "rsl-vsc-focused-folder.focusedFolderView.refresh",
-					"when": "view == rsl-vsc-focused-folder.focusedFolderView",
+					"command": "focusedFolderView.refresh",
+					"when": "view == focusedFolderView",
 					"group": "navigation"
 				}
 			],
 			"explorer/context": [
 				{
-					"command": "rsl-vsc-focused-folder.focusedFolderView.focusFolder",
+					"command": "focusedFolderView.focusFolder",
 					"when": "explorerResourceIsFolder"
 				}
 			]

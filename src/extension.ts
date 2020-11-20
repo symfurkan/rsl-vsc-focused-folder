@@ -7,20 +7,19 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.workspace.workspaceFolders
 	);
 
-	vscode.window.registerTreeDataProvider(
-		"rsl-vsc-focused-folder.focusedFolderView",
-		treeView
-	);
+	vscode.window.registerTreeDataProvider("focusedFolderView", treeView);
 	context.subscriptions.push(
 		...[
-			vscode.commands.registerCommand(`focusFolder`, (args) => {
-				//console.log(args, vscode.Uri.parse(args.fsPath));
-				treeView.selectFolder(vscode.Uri.parse(args.fsPath));
-			}),
-			vscode.commands.registerCommand(`refresh`, (args) => {
+			vscode.commands.registerCommand(
+				"focusedFolderView.focusFolder",
+				(args) => {
+					treeView.selectFolder(vscode.Uri.parse(args.path));
+				}
+			),
+			vscode.commands.registerCommand("focusedFolderView.refresh", (args) => {
 				treeView.refresh();
 			}),
-			vscode.commands.registerCommand(`openFile`, (file) =>
+			vscode.commands.registerCommand("focusedFolderView.openFile", (file) =>
 				vscode.commands.executeCommand("vscode.open", file.resourceUri)
 			),
 		]

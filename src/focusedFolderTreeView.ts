@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { basename } from "path";
 
 export class focusedFolderTreeView
 	implements vscode.TreeDataProvider<FolderAndFile> {
@@ -79,9 +80,7 @@ export class focusedFolderTreeView
 
 	async selectFolder(uri: vscode.Uri) {
 		this.selectedFolder = uri;
-		this.setLastFocused(uri.fsPath);
-		//console.log(await vscode.workspace.fs.stat(uri));
-		//console.log(await vscode.workspace.fs.readDirectory(uri));
+		this.setLastFocused(uri.path);
 		this.refresh();
 	}
 
@@ -93,7 +92,13 @@ export class focusedFolderTreeView
 			return this.recursiveFolder(element.resourceUri);
 		} else {
 			return this.selectedFolder
-				? this.recursiveFolder(this.selectedFolder)
+				? [
+						new FolderAndFile(
+							`${basename(this.selectedFolder.path)} (Focused)`,
+							vscode.TreeItemCollapsibleState.Collapsed,
+							this.selectedFolder
+						),
+				  ]
 				: Promise.resolve([]);
 		}
 	}
@@ -103,7 +108,7 @@ export class FolderAndFile extends vscode.TreeItem {
 	resourceUri: vscode.Uri;
 	command: vscode.Command = {
 		arguments: [this],
-		command: "openFile",
+		command: "focusedFolderView.openFile",
 		title: this.label,
 	};
 
