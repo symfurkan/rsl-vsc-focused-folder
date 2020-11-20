@@ -2,5 +2,6 @@ out
 node_modules
 .vscode-test/
 *.vsix
-todo.md
+todo.todo
 pre_release
+.DS_Store
