@@ -103,7 +103,7 @@ export class FolderAndFile extends vscode.TreeItem {
 	resourceUri: vscode.Uri;
 	command: vscode.Command = {
 		arguments: [this],
-		command: "rsl-vsc-focused-folder.focusedFolderView.openFile",
+		command: "openFile",
 		title: this.label,
 	};
 
