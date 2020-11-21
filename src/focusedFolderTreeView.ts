@@ -34,10 +34,10 @@ export class focusedFolderTreeView
 				.get("lastFocusOnLoad"),
 			lastFocused: this.workspaceRoot
 				? this.extensionContext.workspaceState.get(
-						"rsl-vsc-focused-folder.lastFocused"
+						"rsl-vsc-focused-folder.rememberLastFocus"
 				  )
 				: this.extensionContext.globalState.get(
-						"rsl-vsc-focused-folder.lastFocused"
+						"rsl-vsc-focused-folder.rememberLastFocus"
 				  ),
 		};
 	}
@@ -45,12 +45,12 @@ export class focusedFolderTreeView
 	private setLastFocused(uri: string | undefined) {
 		if (this.workspaceRoot) {
 			this.extensionContext.workspaceState.update(
-				"rsl-vsc-focused-folder.lastFocused",
+				"rsl-vsc-focused-folder.rememberLastFocus",
 				uri
 			);
 		} else {
 			this.extensionContext.globalState.update(
-				"rsl-vsc-focused-folder.lastFocused",
+				"rsl-vsc-focused-folder.rememberLastFocus",
 				uri
 			);
 		}
