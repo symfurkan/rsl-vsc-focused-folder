@@ -2,7 +2,7 @@
 	"name": "rsl-vsc-focused-folder",
 	"displayName": "Focused Folder",
 	"description": "",
-	"publisher": "rsl",
+	"publisher": "rslfrkndmrky",
 	"version": "0.2.0",
 	"engines": {
 		"vscode": "^1.50.0"
@@ -68,10 +68,10 @@
 		"configuration":{
 			"title": "FocusedFolder",
 			"properties": {
-				"focusedFolder.lastFocusOnLoad":{
+				"focusedFolder.rememberLastFocus":{
 					"type":"boolean",
 					"default":false,
-					"description":"Focused Folder focus on restart on last"
+					"description":"Remember Focused Folder from the last selection"
 				}
 			}
 		}

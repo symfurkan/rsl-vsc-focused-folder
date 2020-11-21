@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - unfocus seçeneği eklendi.
 ### Changed
 - fsPath yerine path parametresi yerleştirildi.
+- settings ismi değiştirilerek "rememberLastFocus" yapıldı.
 ### Deleted
 - fazladan yerleştirilmiş command id'leri temizlendi.
 - gerekli olmayan importlar temizlendi.
