@@ -5,8 +5,10 @@ All notable changes to the "rsl-vsc-focused-folder" extension will be documented
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
+## [0.2.0] - 2020-10-21
 ### Added
 - seçilen klasörün en üstte görünmesi sağlandı.
+- unfocus seçeneği eklendi.
 ### Changed
 - fsPath yerine path parametresi yerleştirildi.
 ### Deleted
@@ -22,4 +24,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.0] - 2020-10-08
 ### Added
 - "focus folder" komutu ile focused folder seçilebilir.
-- Focused Folder View'ı içerisinden text dosyalrı açılabilir.
+- Focused Folder View'ı içerisinden text dosyaları açılabilir.
