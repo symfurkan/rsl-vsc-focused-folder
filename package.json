@@ -18,7 +18,7 @@
 		"viewsWelcome": [
 			{
 				"view": "focusedFolderView",
-				"contents": "Not selected focused folder"
+				"contents": "no focused folder selected."
 			}
 		],
 		"views": {
@@ -38,6 +38,10 @@
 			{
 				"command": "focusedFolderView.focusFolder",
 				"title": "Focus Folder"
+			},
+			{
+				"command": "focusedFolderView.unfocus",
+				"title": "Unfocus Folder"
 			}
 		],
 		"menus": {
@@ -46,6 +50,12 @@
 					"command": "focusedFolderView.refresh",
 					"when": "view == focusedFolderView",
 					"group": "navigation"
+				}
+			],
+			"view/item/context":[
+				{
+					"command": "focusedFolderView.unfocus",
+					"when": "view == focusedFolderView && viewItem == focusedBaseFolder"
 				}
 			],
 			"explorer/context": [

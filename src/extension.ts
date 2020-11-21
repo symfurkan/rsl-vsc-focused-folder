@@ -22,6 +22,9 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.commands.registerCommand("focusedFolderView.openFile", (file) =>
 				vscode.commands.executeCommand("vscode.open", file.resourceUri)
 			),
+			vscode.commands.registerCommand("focusedFolderView.unfocus", (args) => {
+				treeView.selectFolder(undefined);
+			}),
 		]
 	);
 }

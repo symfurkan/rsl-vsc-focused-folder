@@ -42,7 +42,7 @@ export class focusedFolderTreeView
 		};
 	}
 
-	private setLastFocused(uri: string) {
+	private setLastFocused(uri: string | undefined) {
 		if (this.workspaceRoot) {
 			this.extensionContext.workspaceState.update(
 				"rsl-vsc-focused-folder.lastFocused",
@@ -78,9 +78,14 @@ export class focusedFolderTreeView
 		this._onDidChangeTreeData.fire();
 	}
 
-	async selectFolder(uri: vscode.Uri) {
-		this.selectedFolder = uri;
-		this.setLastFocused(uri.path);
+	async selectFolder(uri: vscode.Uri | undefined) {
+		if (uri) {
+			this.selectedFolder = uri;
+			this.setLastFocused(uri.path);
+		} else {
+			this.selectedFolder = undefined;
+			this.setLastFocused(undefined);
+		}
 		this.refresh();
 	}
 
@@ -95,9 +100,9 @@ export class focusedFolderTreeView
 				? [
 						new FolderAndFile(
 							`${basename(this.selectedFolder.path)} (Focused)`,
-							vscode.TreeItemCollapsibleState.Collapsed,
+							vscode.TreeItemCollapsibleState.Expanded,
 							this.selectedFolder
-						),
+						).setContextValue("focusedBaseFolder"),
 				  ]
 				: Promise.resolve([]);
 		}
@@ -106,11 +111,7 @@ export class focusedFolderTreeView
 
 export class FolderAndFile extends vscode.TreeItem {
 	resourceUri: vscode.Uri;
-	command: vscode.Command = {
-		arguments: [this],
-		command: "focusedFolderView.openFile",
-		title: this.label,
-	};
+	command?: vscode.Command;
 
 	constructor(
 		public readonly label: string,
@@ -120,5 +121,18 @@ export class FolderAndFile extends vscode.TreeItem {
 		super(label, collapsibleState);
 		this.tooltip = this.label;
 		this.resourceUri = uri;
+		this.command =
+			collapsibleState === vscode.TreeItemCollapsibleState.None
+				? {
+						arguments: [this],
+						command: "focusedFolderView.openFile",
+						title: this.label,
+				  }
+				: undefined;
+	}
+
+	setContextValue(value: string) {
+		this.contextValue = value;
+		return this;
 	}
 }
