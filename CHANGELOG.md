@@ -5,7 +5,7 @@ All notable changes to the "rsl-vsc-focused-folder" extension will be documented
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
-## [0.2.0] - 2020-10-21
+## [0.2.0] - 2020-10-22
 ### Added
 - seçilen klasörün en üstte görünmesi sağlandı.
 - unfocus seçeneği eklendi.
