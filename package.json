@@ -52,7 +52,7 @@
 					"group": "navigation"
 				}
 			],
-			"view/item/context":[
+			"view/item/context": [
 				{
 					"command": "focusedFolderView.unfocus",
 					"when": "view == focusedFolderView && viewItem == focusedBaseFolder"
@@ -65,13 +65,13 @@
 				}
 			]
 		},
-		"configuration":{
+		"configuration": {
 			"title": "FocusedFolder",
 			"properties": {
-				"focusedFolder.rememberLastFocus":{
-					"type":"boolean",
-					"default":false,
-					"description":"Remember Focused Folder from the last selection"
+				"focusedFolder.rememberLastFocus": {
+					"type": "boolean",
+					"default": false,
+					"description": "Remember Focused Folder from the last selection"
 				}
 			}
 		}
