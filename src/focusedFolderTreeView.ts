@@ -31,7 +31,7 @@ export class focusedFolderTreeView
 		this.settings = {
 			lastFocusOnLoad: vscode.workspace
 				.getConfiguration("focusedFolder")
-				.get("lastFocusOnLoad"),
+				.get("rememberLastFocus"),
 			lastFocused: this.workspaceRoot
 				? this.extensionContext.workspaceState.get(
 						"rsl-vsc-focused-folder.rememberLastFocus"
